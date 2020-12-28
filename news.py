@@ -1,0 +1,20 @@
+import requests
+import json
+import scroll
+import buzzer
+import time
+
+url = ('https://newsapi.org/v2/top-headlines?'
+       'country=in&'
+       'apiKey=0a90f81745c54c8997801542026364ce')
+
+
+response = requests.get(url)
+data = response.json()
+buzzer.playGTA()
+for each in data['articles']:
+        display={}
+        display['author']=each['source']['name'].encode("utf-8")
+        display['text']=each['title'].encode("utf-8")
+        display['update'] = 'True'
+        scroll.scrolling(display)
